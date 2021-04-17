@@ -14,11 +14,11 @@ import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
 import useI18n from 'hooks/useI18n'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
-import KingdomCard from './components/KingdomCard/FarmCard'
+// import KingdomCard from './components/KingdomCard/FarmCard'
 import FarmTabButtons from './components/FarmTabButtons'
 import Divider from './components/Divider'
-// import Kingdom from '../Kingdoms/components/Kingdom'
-// import Kingdoms from '../Kingdoms'
+import Kingdom from '../Kingdoms/components/Kingdom'
+import Kingdoms from '../Kingdoms'
 
 export interface FarmsProps{
   tokenMode?: boolean
@@ -85,7 +85,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
       })
       return farmsToDisplayWithAPY.map((farm) => {
         if (kingdomMode) return (
-          <KingdomCard
+          <Kingdom
             key={farm.pid}
             farm={farm}
             removed={removed}
@@ -112,12 +112,12 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
     [bnbPrice, account, cakePrice, ethereum, kingdomMode],
   )
 
-  // if (kingdomMode)
-  //   return (
-  //     <Kingdoms>
-  //       {farmsList(activeFarms, false)}
-  //     </Kingdoms>
-  //   )
+  if (kingdomMode)
+    return (
+      <Kingdoms>
+        {farmsList(activeFarms, false)}
+      </Kingdoms>
+    )
 
   let heading = TranslateString(320, 'Stake LP tokens to earn CUB')
   if (tokenMode) heading = TranslateString(10002, 'Stake tokens to earn CUB')
